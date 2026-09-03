@@ -97,7 +97,6 @@ class _UserListScreenState extends State<UserListScreen> {
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Tugas Mandiri 3: Menambahkan data username dan phone pada tampilan (sebagai implementasi variabel JSON)
                         Text('@${user.username}'),
                         Text('✉ ${user.email}'),
                         Text('📞 ${user.phone}'),
