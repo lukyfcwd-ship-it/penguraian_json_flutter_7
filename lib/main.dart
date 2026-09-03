@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Demo Parsing JSON SMK RPL',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal), // Mengubah warna tema keseluruhan
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.brown), // Tema disesuaikan dengan gambar Anda
         useMaterial3: true,
       ),
       home: const UserListScreen(),
@@ -44,22 +44,20 @@ class _UserListScreenState extends State<UserListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // Tugas Mandiri 5: Mengubah Judul AppBar dan warnanya
-        title: const Text('Daftar Pelanggan PT. [Andar]'),
-        backgroundColor: const Color.fromARGB(255, 150, 72, 0), // Mengubah warna AppBar
+        // Judul disesuaikan dengan instruksi tugas mandiri dan gambar Anda
+        title: const Text('Daftar Pelanggan PT. [Andar]'), 
+        backgroundColor: Colors.brown[700], // Menyamakan warna latar AppBar seperti gambar
         foregroundColor: Colors.white,
       ),
       body: FutureBuilder<List<UserModel>>(
         future: _futureUsers,
         builder: (context, snapshot) {
-          // 1. Kondisi saat data masih dalam proses loading
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(),
             );
           }
 
-          // 2. Kondisi jika terjadi error
           if (snapshot.hasError) {
             return Center(
               child: Text(
@@ -70,7 +68,6 @@ class _UserListScreenState extends State<UserListScreen> {
             );
           }
 
-        
           if (snapshot.hasData && snapshot.data!.isNotEmpty) {
             List<UserModel> users = snapshot.data!;
 
@@ -84,7 +81,7 @@ class _UserListScreenState extends State<UserListScreen> {
                   margin: const EdgeInsets.symmetric(vertical: 6.0),
                   child: ListTile(
                     leading: CircleAvatar(
-                      backgroundColor: Colors.teal,
+                      backgroundColor: Colors.teal, // Warna avatar teal seperti pada gambar
                       child: Text(
                         user.name[0],
                         style: const TextStyle(color: Colors.white),
@@ -98,8 +95,21 @@ class _UserListScreenState extends State<UserListScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('@${user.username}'),
-                        Text('✉ ${user.email}'),
-                        Text('📞 ${user.phone}'),
+                        // Menggunakan ikon bawaan agar tidak ada masalah rendering
+                        Row(
+                          children: [
+                            const Icon(Icons.email_outlined, size: 16, color: Colors.blueAccent),
+                            const SizedBox(width: 4),
+                            Text(user.email),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            const Icon(Icons.phone, size: 16, color: Colors.black54),
+                            const SizedBox(width: 4),
+                            Text(user.phone),
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -108,7 +118,6 @@ class _UserListScreenState extends State<UserListScreen> {
             );
           }
 
-          // 4. Kondisi jika data kosong
           return const Center(
             child: Text('Tidak ada data pengguna.'),
           );
@@ -116,4 +125,4 @@ class _UserListScreenState extends State<UserListScreen> {
       ),
     );
   }
-} 
+}

@@ -1,9 +1,9 @@
 class UserModel {
   final int id;
   final String name;
-  final String username; // Tugas Mandiri 1: Atribut username
+  final String username; 
   final String email;
-  final String phone;    // Tugas Mandiri 1: Atribut phone
+  final String phone;    
 
   UserModel({
     required this.id,
